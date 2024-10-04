@@ -1,0 +1,5 @@
+fastapi[standard]
+asyncpg
+pydantic==2.9.2
+alembic==1.13.3
+FastAPI-users-db-sqlalchemy==4.0.5
