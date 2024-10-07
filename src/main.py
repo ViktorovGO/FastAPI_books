@@ -1,24 +1,24 @@
-from fastapi_users import FastAPIUsers
+import uvicorn
+
+
+from fastapi import Depends, FastAPI
+
 from auth.models import User
 from auth.scemas import UserCreate, UserRead, UserUpdate
 from auth.service import auth_backend
-from fastapi import Depends, FastAPI
+from auth.router import fastapi_users, current_user
 
-from auth.utils import get_user_manager
+from books.router import router as books_router
 
 
 app = FastAPI(
     title='Библиотека'
 )
 
-fastapi_users = FastAPIUsers[User, int](
-    get_user_manager,
-    [auth_backend],
-)
 
 app.include_router(
     fastapi_users.get_auth_router(auth_backend),
-    prefix="/auth/jwt",
+    prefix="/auth",
     tags=["Auth"],
 )
 
@@ -31,16 +31,10 @@ app.include_router(
 app.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix="/users",
-    tags=["users"],
+    tags=["Users"],
 )
 
-current_user = fastapi_users.current_user()
+app.include_router(books_router)
 
-@app.get("/protected-route")
-def protected_route(user: User = Depends(current_user)):
-    return f"Hello, {user.email}"
-
-@app.get("/books", tags=['Books'])
-async def get_books(pwd: str):
-
-    return {'status':'success'}
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

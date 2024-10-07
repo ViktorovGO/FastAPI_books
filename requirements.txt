@@ -1,5 +1,9 @@
 fastapi[standard]
 asyncpg
-pydantic==2.9.2
+pydantic==1.10.2
 alembic==1.13.3
-FastAPI-users-db-sqlalchemy==4.0.5
+fastapi-users[sqlalchemy]==10.2
+email_validator
+fastapi-users-db-sqlalchemy==6.0.1
+uvicorn
+python-dotenv
