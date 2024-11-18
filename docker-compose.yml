@@ -3,14 +3,15 @@ version: '3'
 services:
   # fastapi:
   #   build: .
-  #   # command: python ./src/main.py
+  #   command: python ./src/main.py
   #   ports:
   #     - 8000:8000
   #   environment:
   #     - DB_USER=${DB_USER}
   #     - DB_PASS=${DB_PASS}
   #     - DB_NAME=${DB_NAME}
-  #     - DB_HOST=${DB_HOST}
+  #     # - DB_HOST=${DB_HOST}
+  #     - DB_HOST=database
   #     - DB_PORT=${DB_PORT}
   #   depends_on:
   #     - database

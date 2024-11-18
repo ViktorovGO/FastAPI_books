@@ -4,7 +4,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from auth.models import User
 
 Base = declarative_base()
-
 class Book(Base):
     __tablename__ = 'book'
     id = Column(Integer, primary_key = True)
